@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useState } from "react";
 
 /**
@@ -10,7 +9,7 @@ import { useState } from "react";
  * load — a renamed or missing file — this renders a warm material block with
  * the caption instead of a broken image or a white hole in the layout.
  *
- * Always used with `fill`, so the parent needs `position: relative` and a size.
+ * Always fills its parent, so the parent needs `position: relative` and a size.
  */
 export function Media({
   src,
@@ -20,7 +19,6 @@ export function Media({
   sizes = "100vw",
   priority = false,
   className = "",
-  quality,
   /** object-position for cropped (object-cover) plates. */
   position,
 }: {
@@ -52,14 +50,14 @@ export function Media({
   }
 
   return (
-    <Image
+    <img
       src={src}
       alt={alt}
-      fill
       sizes={sizes}
-      priority={priority}
-      quality={quality}
-      className={className}
+      loading={priority ? "eager" : "lazy"}
+      decoding={priority ? "sync" : "async"}
+      fetchPriority={priority ? "high" : undefined}
+      className={`absolute inset-0 h-full w-full object-cover ${className}`}
       style={position ? { objectPosition: position } : undefined}
       onError={() => setFailed(true)}
     />
