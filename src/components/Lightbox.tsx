@@ -78,8 +78,8 @@ export function Lightbox({
       if (event.key === "Tab") {
         const items = focusable();
         if (items.length === 0) return;
-        const first = items[0];
-        const last = items[items.length - 1];
+        const first = items[0]!;
+        const last = items[items.length - 1]!;
         if (event.shiftKey && document.activeElement === first) {
           event.preventDefault();
           last.focus();
@@ -145,7 +145,7 @@ export function Lightbox({
             transition={{ duration: 0.45, ease }}
           >
             <Media
-              src={project.images[index]}
+              src={project.images[index]!}
               alt={`${project.title}, ${project.locality} — photograph ${index + 1} of ${total}`}
               label={project.title}
               sizes="(min-width: 1024px) 80vw, 100vw"
