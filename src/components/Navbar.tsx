@@ -54,8 +54,8 @@ export function Navbar() {
       const items = focusables();
       if (items.length === 0) return;
 
-      const first = items[0];
-      const last = items[items.length - 1];
+      const first = items[0]!;
+      const last = items[items.length - 1]!;
 
       if (event.shiftKey && document.activeElement === first) {
         event.preventDefault();
